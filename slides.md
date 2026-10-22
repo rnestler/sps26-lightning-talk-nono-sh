@@ -1,662 +1,289 @@
 ---
-# try also 'default' to start simple
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply UnoCSS classes to the current slide
+title: Put Your Agent in a Box
+info: Raphael Nestler — Swiss Python Summit 2026
 class: text-center
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
 # enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
-# duration of the presentation
-duration: 35min
+duration: 5min
 ---
 
-# Welcome to Slidev
+# Put your agent in a box 📦
 
-Presentation slides for developers
+…and your `pip install` too. Sandboxing with [nono](https://nono.sh)
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
-
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
+<div class="abs-bl m-6 text-sm opacity-70 text-left">
+Raphael Nestler · Swiss Python Summit 2026
 </div>
 
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+~10s. Hi, I'm Raphael. Five minutes on why I run my coding agent and my
+Python tooling in a sandbox, and how easy that is with nono.
 -->
 
 ---
-transition: fade-out
+layout: two-cols-header
 ---
 
-# What is Slidev?
+# Everything runs as *you*
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+::left::
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
+Claude Code, Cursor, `uv run`, `pip install`, `pytest` …
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+<v-clicks>
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
+ * 🔑 `~/.ssh`, `~/.aws`, `~/.config/gh`
+ * 📄 `.env` in your project
+ * 🌍 every `*_TOKEN` in your environment
+ * 🗑️ `rm -rf ~`
 
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+</v-clicks>
 
 ::right::
 
-<Toc text-sm minDepth="1" maxDepth="2" />
+<v-click>
 
----
-layout: image-right
-image: https://cover.sli.dev
----
+> LLMs are probabilistic — a <span class="text-red-500">**1%**</span> chance of
+> disaster makes it a matter of <span class="text-red-500">*when*</span>, not
+> <span class="text-red-500">*if*</span>.
+>
+> — [agent-safehouse.dev](https://agent-safehouse.dev/)
 
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts [filename-example.ts] {all|4|6|6-7|9|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="342" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+</v-click>
 
 <!--
-Notes can also sync with clicks
+~35s. Your agent, and every Python process you start, has the same rights you
+have. SSH keys, cloud credentials, the .env file, every token you exported in
+your .zshrc. And it can delete your home directory.
 
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
+An agent doesn't need to be evil. It just has to be wrong once.
 -->
 
 ---
-level: 2
+layout: two-cols-header
 ---
 
-# Shiki Magic Move
+# It happens
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+::left::
 
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+### 🤖 Agents
 
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
+<img src="/images/fable-nuked-my-dev-machine.jpg" class="h-70 object-contain" alt="Tweet: Fable nuked my entire dev machine" />
 
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
+::right::
 
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
+### 🐍 PyPI
 
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>`, `<BlueSky/>`, and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
+ * **LiteLLM** 1.82.7 / 1.82.8 (Mar 2026)
+   * `litellm_init.pth` runs **on every interpreter start**
+   * steals env vars, SSH keys, cloud creds, `.env`
+ * **Ultralytics** 8.3.41 / 8.3.42 (Dec 2024)
+   * cryptominer on install
 
 <!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
+~40s. Left: Claude was testing a sandbox it was building itself, by running
+rm -rf on the home directory. The sandbox didn't work. Everything gone.
 
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
+Right: this is the Python part. LiteLLM was backdoored in March. The 1.82.8
+release shipped a .pth file. Python executes .pth files at interpreter
+startup, so you didn't even need to `import litellm`. Just having it installed
+was enough. It was online for about three hours.
+Ultralytics in Dec 2024: a cryptominer, also pulled in by ComfyUI.
 -->
 
 ---
-class: px-20
----
 
-# Themes
+# What doesn't work
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
+<v-clicks>
 
-<div grid="~ cols-2 gap-2" m="t-2">
+ * 🙏 **Prompt begging**: "Please don't touch my secrets"
+ * 😴 **Approve everything**: approval fatigue, you'll click *yes* anyway
+ * 📝 **Agent deny-lists**: they can't cover everything
 
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you press <kbd>space</kbd> or <kbd>right</kbd>, or click outside the slide on the right.
-
-```html
-<div v-click>This shows up when you trigger a click animation.</div>
-```
-
-</div>
-
-<p v-click>
-You can also add modifiers to change the animation:
-</p>
-
-<div class="grid gap-3 mt-4 text-sm" style="grid-template-columns: repeat(3, 1fr) 1.5fr 1fr">
-  <div v-after.up class="p-3 rounded border border-primary/20 bg-primary/10">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.up</div>
-    <div>Slide from bottom</div>
-  </div>
-  <div v-click.fade-in class="p-3 rounded border border-primary/30 bg-primary/15">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade-in</div>
-    <div>Fade in</div>
-  </div>
-  <div v-click.fade class="p-3 rounded border border-primary/40 bg-primary/20">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade</div>
-    <div>Dim (0.5 opacity)</div>
-  </div>
-  <div v-click.fade.right.scale class="p-3 rounded border border-primary/50 bg-primary/25">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade.right.scale</div>
-    <div>Composed</div>
-  </div>
-  <div v-click.none class="p-3 rounded border border-primary/60 bg-primary/30">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.none</div>
-    <div>No transition</div>
-  </div>
-</div>
+</v-clicks>
 
 <v-click>
 
-The <span v-mark.red="7"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="8">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
+```json
+{ "permissions": { "deny": ["Read(.env)"] } }
+```
 
-```html
-<span v-mark.underline.orange>inline markers</span>
+```bash
+python -c "print(open('.env').read())"   # 🙃
 ```
 
 </v-click>
 
-<div v-click mt-12>
+<v-click>
 
-[Learn more](https://sli.dev/guide/animations#click-animation)
+…and none of it helps against a malicious `.pth` file.
 
-</div>
+</v-click>
+
+<!--
+~35s. Asking the model nicely doesn't work. Approving every command doesn't
+scale. You'll click yes. Agent permission rules are deny-lists, and Python
+alone gives you a dozen ways around them.
+
+And all of this lives inside the agent. A malicious package doesn't care
+about your Claude settings.
+-->
 
 ---
 
-# Motions
+# nono: a sandbox in the kernel
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+ * **Allow-list** enforced by the OS: Landlock (Linux), Seatbelt (macOS)
+ * **Irrevocable**: once applied, not even the sandboxed process can undo it
+ * Works for **any command**: agents, `python`, `uv`, `pytest`, …
+ * Credentials are **always denied**, even inside allowed paths
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
+```bash
+$ nono run --allow-cwd -- python -c "import os; os.listdir('/home/raphael/.ssh')"
+PermissionError: [Errno 13] Permission denied: '/home/raphael/.ssh'
+
+$ nono why --profile claude --path ~/.ssh/id_ed25519 --op read
+DENIED
+  Reason: filesystem_deny
+  Details: Path is covered by filesystem.deny rule: /home/raphael/.ssh
 ```
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
+<!--
+~40s. nono uses the same kernel features the OS uses to isolate apps. No
+container, no VM, no file syncing. It's your real working copy at native speed.
 
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
+It's an allow-list: the process only gets what you grant. And once the sandbox
+is on, it can't be lifted, not by the agent and not by a malicious package.
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
+`nono why` tells you why something got denied, so you don't have to guess.
+-->
+
+---
+
+# For your Python workflow
+
+```bash
+# your coding agent, with a ready-made profile
+nono run --profile claude -- claude
+
+# the test suite of that PR you're reviewing
+nono run --allow-cwd -- uv run pytest
+
+# installing deps: only allow the package index
+nono run --allow-cwd \
+  --allow-domain pypi.org --allow-domain files.pythonhosted.org \
+  -- uv sync
+```
+
+<v-click>
+
+ * Undo with atomic snapshots: `nono rollback`
+ * Audit trail of what was allowed *and* denied
+
+</v-click>
+
+<!--
+~35s. Three ways I use it. The agent with the built-in claude profile. Running
+someone else's code, like the tests of a PR. And installing dependencies with
+network access limited to PyPI. A stealer can run, but it can't read your
+keys and it can't phone home.
+
+Plus: snapshots and rollback if the agent messes up your working copy, and an
+audit log.
+-->
+
+---
+layout: two-cols-header
+---
+
+# Don't forget the environment
+
+::left::
+
+Env vars are **inherited by default**
+
+```text
+$ export TEST_ENV_TOKEN=my-secret
+$ nono run --profile claude -- claude
+❯ Show me TEST_ENV_TOKEN
+● Bash(echo "$TEST_ENV_TOKEN")
+  ⎿  my-secret
+```
+
+<v-click>
+
+Better: **credential injection** via proxy, so the agent only ever sees a
+phantom token.
+
+</v-click>
+
+::right::
+
+`~/.config/nono/profiles/claude-filter-env.json`
+
+```json
+{
+  "extends": "claude",
+  "environment": {
+    "allow_vars": [
+      "PATH", "HOME", "TERM",
+      "LANG", "LC_*"
+    ]
   }
 }
-</script>
+```
 
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
+```text
+● Bash(echo "$TEST_ENV_TOKEN")
+  ⎿  (No output)
+```
 
-[Learn more](https://sli.dev/guide/animations.html#motion)
+<!--
+~35s. One gotcha: environment variables are passed through by default. So
+that GITHUB_TOKEN in your .zshrc is visible. Fix it with a small profile that
+extends the built-in one and allow-lists the variables you need.
 
-</div>
+Even better: nono can run a proxy that injects the real credential. The agent
+only gets a session token that's useless outside the sandbox.
+-->
 
 ---
-
-# $\LaTeX$
-
-$\LaTeX$ is supported out-of-box. Powered by [$\KaTeX$](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
-
----
-layout: center
 class: text-center
 ---
 
-# Learn More
+# P.S. Claude helped me make these slides
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+…running inside nono:
 
-<PoweredBySlidev mt-10 />
+```text
+$ ls ~/projects/python-summit
+ls: cannot open directory '/home/raphael/projects/python-summit': Permission denied
+
+$ nono why --self --path /home/raphael/projects/python-summit --op read
+DENIED
+  Reason: path_not_granted
+  Suggested fix: --read /home/raphael/projects/python-summit
+```
+
+<div class="mt-8">
+
+**Sandbox as the outer wall + agent permissions + you in the loop**
+
+[nono.sh](https://nono.sh) · [blog: Safe Ways to Use AI Agents](https://blog.rnstlr.ch/safe-ways-to-use-ai-agents.html)
+
+</div>
+
+<!--
+~30s. Fun fact: Claude, running in nono, helped me with these slides. It tried
+to look one directory up, the sandbox said no, and it told me why.
+
+Takeaway: a sandbox is the outer wall. Keep using the agent's own permissions,
+stay in the loop, and the next time a .pth file goes rogue, it's stuck in a
+box. Thanks!
+-->

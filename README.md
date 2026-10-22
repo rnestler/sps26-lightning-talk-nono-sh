@@ -1,11 +1,14 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Put Your Agent in a Box
 
-To start the slide show:
+Lightning talk (5 min) at the Swiss Python Summit 2026 about sandboxing AI
+coding agents and Python tooling with [nono](https://nono.sh).
+
+Based on the blog post [Safe Ways to Use AI Agents](https://blog.rnstlr.ch/safe-ways-to-use-ai-agents.html).
+
+Built with [Slidev](https://sli.dev):
 
 - `npm install`
 - `npm run dev`
 - visit <http://localhost:3030>
 
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev at the [documentation](https://sli.dev/).
+Images live in `public/images/`.

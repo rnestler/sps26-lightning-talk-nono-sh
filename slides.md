@@ -26,10 +26,10 @@ Python tooling in a sandbox, and how easy that is with nono.
 -->
 
 ---
-layout: two-cols
 eyebrow: The problem
-heading: Everything runs as you
 ---
+
+# Everything runs as you
 
 Claude Code, Cursor, `uv run`, `pip install`, `pytest` …
 
@@ -42,23 +42,24 @@ Claude Code, Cursor, `uv run`, `pip install`, `pytest` …
 
 </v-clicks>
 
-::right::
+<!--
+~25s. Your agent, and every Python process you start, has the same rights you
+have. SSH keys, cloud credentials, the .env file, every token you exported in
+your .zshrc. And it can delete your home directory.
+-->
 
-<v-click>
+---
+layout: quote
+eyebrow: Keep in mind
+---
 
-> LLMs are probabilistic — a 1% chance of disaster makes it a matter of
+> LLMs are probabilistic — a **1%** chance of disaster makes it a matter of
 > *when*, not *if*.
 
 [agent-safehouse.dev](https://agent-safehouse.dev/)
 
-</v-click>
-
 <!--
-~35s. Your agent, and every Python process you start, has the same rights you
-have. SSH keys, cloud credentials, the .env file, every token you exported in
-your .zshrc. And it can delete your home directory.
-
-An agent doesn't need to be evil. It just has to be wrong once.
+~10s. An agent doesn't need to be evil. It just has to be wrong once.
 -->
 
 ---
@@ -133,6 +134,22 @@ about your Claude settings.
 -->
 
 ---
+layout: quote
+eyebrow: The solution
+class: rd-quote-strong-source
+---
+
+> Agent runtime security. **Kernel-enforced** boundaries for AI agents, with
+> **zero setup** and **zero latency**.
+
+[nono.sh](https://nono.sh)
+
+<!--
+~10s. So what does work? An outer wall the agent can't talk its way through.
+That's nono.
+-->
+
+---
 eyebrow: nono.sh
 ---
 
@@ -145,12 +162,19 @@ eyebrow: nono.sh
 
 ```bash
 $ nono run --allow-cwd -- python -c "import os; os.listdir('/home/raphael/.ssh')"
+...
 PermissionError: [Errno 13] Permission denied: '/home/raphael/.ssh'
 
-$ nono why --profile claude --path ~/.ssh/id_ed25519 --op read
+Command exited with code 1.
+
+Sandbox denial:
+  /home/raphael/.ssh (read+write)
+
+$ nono why --path ~/.ssh/id_ed25519 --op read
 DENIED
   Reason: filesystem_deny
   Details: Path is covered by filesystem.deny rule: /home/raphael/.ssh
+  Policy: filesystem.deny
 ```
 
 <!--

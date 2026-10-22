@@ -49,6 +49,14 @@ const { currentPage } = useNav()
   flex-direction: column;
   justify-content: center;
 }
+.rd-quote-content h1 {
+  margin: 0 0 56px;
+  font-size: 140px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: #27d69f;
+}
 .rd-quote-content blockquote {
   margin: 0;
   padding: 0 0 0 64px;

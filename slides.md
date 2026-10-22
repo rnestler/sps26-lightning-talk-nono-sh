@@ -139,6 +139,8 @@ eyebrow: The solution
 class: rd-quote-strong-source
 ---
 
+# nono.sh
+
 > Agent runtime security. **Kernel-enforced** boundaries for AI agents, with
 > **zero setup** and **zero latency**.
 
@@ -199,25 +201,49 @@ eyebrow: In practice
 nono run --profile claude -- claude
 
 # the test suite of that PR you're reviewing
-nono run --allow-cwd -- uv run pytest
+nono run --profile python-dev --allow ~/.cache/uv --allow-cwd -- uv run pytest
 
-# installing deps: only allow the package index
-nono run --allow-cwd \
-  --allow-domain pypi.org --allow-domain files.pythonhosted.org \
-  -- uv sync
+# installing deps: only allows the package index
+nono run --profile python-dev --allow ~/.cache/uv --allow-cwd -- uv sync
 
 # something went wrong? undo it from the snapshot
 nono rollback
 ```
 
 <!--
-~35s. Three ways I use it. The agent with the built-in claude profile. Running
+~25s. Three ways I use it. The agent with the built-in claude profile. Running
 someone else's code, like the tests of a PR. And installing dependencies with
-network access limited to PyPI. A stealer can run, but it can't read your
-keys and it can't phone home.
+network access limited to PyPI.
 
-Plus: snapshots and rollback if the agent messes up your working copy, and an
-audit log of what was allowed and denied.
+Plus: snapshots and rollback if the agent messes up your working copy.
+-->
+
+---
+layout: code
+eyebrow: In practice
+---
+
+# Other domains are blocked
+
+```console
+$ nono run --profile python-dev --allow ~/.cache/uv --allow-cwd -- curl -i https://google.ch
+...
+HTTP/1.1 403 Forbidden: host google.ch:443 is not in the allowlist
+
+curl: (7) CONNECT tunnel failed, response 403
+...
+
+Network denials were observed during this session:
+  deny connect google.ch:443 (host google.ch:443 is not in the allowlist)
+
+To allow this traffic, re-run with:
+  --allow-domain google.ch
+```
+
+<!--
+~15s. Anything that isn't on the allow-list gets a 403 from nono's proxy. A
+stealer can run, but it can't phone home. And nono tells you afterwards what
+it blocked, plus an audit log of what was allowed and denied.
 -->
 
 ---

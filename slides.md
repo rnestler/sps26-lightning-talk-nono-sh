@@ -65,9 +65,8 @@ An agent doesn't need to be evil. It just has to be wrong once.
 layout: two-cols
 eyebrow: It happens
 heading: Agents and PyPI
+class: rd-split-wide-left
 ---
-
-### 🤖 Agents
 
 <img src="/images/fable-nuked-my-dev-machine.jpg" alt="Tweet: Fable nuked my entire dev machine" />
 

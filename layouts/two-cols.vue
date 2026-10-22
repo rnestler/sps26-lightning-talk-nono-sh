@@ -36,7 +36,7 @@ defineProps({
   font-family: 'Montserrat', sans-serif;
   color: #161e22;
   box-sizing: border-box;
-  padding: 88px 140px 76px;
+  padding: 56px 140px 76px;
   display: flex;
   flex-direction: column;
 }
@@ -63,7 +63,7 @@ defineProps({
 .rd-rule {
   height: 2px;
   background: #e4e8e5;
-  margin: 36px 0 44px;
+  margin: 28px 0 32px;
 }
 .rd-split-grid {
   flex: 1;

@@ -29,6 +29,20 @@
   border: 2px solid #e4e8e5;
 }
 
+/* Give a screenshot in the left column more room */
+.rd-split-wide-left .rd-split-grid {
+  grid-template-columns: 1.3fr 1fr;
+  gap: 0 64px;
+}
+.rd-split-wide-left .rd-split-left {
+  padding-right: 64px;
+}
+.rd-split-wide-left .rd-split-col img {
+  height: 680px;
+  max-height: none;
+  max-width: 100%;
+}
+
 .rd-split-col li::before {
   content: '';
   display: inline-block;

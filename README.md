@@ -11,4 +11,5 @@ Built with [Slidev](https://sli.dev):
 - `npm run dev`
 - visit <http://localhost:3030>
 
-Images live in `public/images/`.
+Images live in `public/images/`. The layouts in `layouts/` give the deck its
+look; shared tweaks are in `styles/index.css`.

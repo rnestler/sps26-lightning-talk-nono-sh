@@ -1,23 +1,24 @@
 ---
-theme: seriph
+theme: default
 title: Put Your Agent in a Box
 info: Raphael Nestler — Swiss Python Summit 2026
-class: text-center
+colorSchema: light
+canvasWidth: 1920
+fonts:
+  sans: Montserrat
+  mono: Fira Code
 drawings:
   persist: false
 transition: slide-left
 # enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
 duration: 5min
+layout: cover
 ---
 
-# Put your agent in a box 📦
+# Put your agent in a box
 
-…and your `pip install` too. Sandboxing with [nono](https://nono.sh)
-
-<div class="abs-bl m-6 text-sm opacity-70 text-left">
-Raphael Nestler · Swiss Python Summit 2026
-</div>
+…and your `pip install` too. Sandboxing with nono. Raphael Nestler
 
 <!--
 ~10s. Hi, I'm Raphael. Five minutes on why I run my coding agent and my
@@ -25,21 +26,19 @@ Python tooling in a sandbox, and how easy that is with nono.
 -->
 
 ---
-layout: two-cols-header
+layout: two-cols
+eyebrow: The problem
+heading: Everything runs as you
 ---
-
-# Everything runs as *you*
-
-::left::
 
 Claude Code, Cursor, `uv run`, `pip install`, `pytest` …
 
 <v-clicks>
 
- * 🔑 `~/.ssh`, `~/.aws`, `~/.config/gh`
- * 📄 `.env` in your project
- * 🌍 every `*_TOKEN` in your environment
- * 🗑️ `rm -rf ~`
+* 🔑 `~/.ssh`, `~/.aws`, `~/.config/gh`
+* 📄 `.env` in your project
+* 🌍 every `*_TOKEN` in your environment
+* 🗑️ `rm -rf ~`
 
 </v-clicks>
 
@@ -47,11 +46,10 @@ Claude Code, Cursor, `uv run`, `pip install`, `pytest` …
 
 <v-click>
 
-> LLMs are probabilistic — a <span class="text-red-500">**1%**</span> chance of
-> disaster makes it a matter of <span class="text-red-500">*when*</span>, not
-> <span class="text-red-500">*if*</span>.
->
-> — [agent-safehouse.dev](https://agent-safehouse.dev/)
+> LLMs are probabilistic — a 1% chance of disaster makes it a matter of
+> *when*, not *if*.
+
+[agent-safehouse.dev](https://agent-safehouse.dev/)
 
 </v-click>
 
@@ -64,26 +62,24 @@ An agent doesn't need to be evil. It just has to be wrong once.
 -->
 
 ---
-layout: two-cols-header
+layout: two-cols
+eyebrow: It happens
+heading: Agents and PyPI
 ---
-
-# It happens
-
-::left::
 
 ### 🤖 Agents
 
-<img src="/images/fable-nuked-my-dev-machine.jpg" class="h-70 object-contain" alt="Tweet: Fable nuked my entire dev machine" />
+<img src="/images/fable-nuked-my-dev-machine.jpg" alt="Tweet: Fable nuked my entire dev machine" />
 
 ::right::
 
 ### 🐍 PyPI
 
- * **LiteLLM** 1.82.7 / 1.82.8 (Mar 2026)
-   * `litellm_init.pth` runs **on every interpreter start**
-   * steals env vars, SSH keys, cloud creds, `.env`
- * **Ultralytics** 8.3.41 / 8.3.42 (Dec 2024)
-   * cryptominer on install
+* **LiteLLM** 1.82.7 / 1.82.8 (Mar 2026)
+  * `litellm_init.pth` runs on **every interpreter start**
+  * steals env vars, SSH keys, cloud creds, `.env`
+* **Ultralytics** 8.3.41 / 8.3.42 (Dec 2024)
+  * cryptominer on install
 
 <!--
 ~40s. Left: Claude was testing a sandbox it was building itself, by running
@@ -97,14 +93,16 @@ Ultralytics in Dec 2024: a cryptominer, also pulled in by ComfyUI.
 -->
 
 ---
+eyebrow: Non-solutions
+---
 
 # What doesn't work
 
 <v-clicks>
 
- * 🙏 **Prompt begging**: "Please don't touch my secrets"
- * 😴 **Approve everything**: approval fatigue, you'll click *yes* anyway
- * 📝 **Agent deny-lists**: they can't cover everything
+* 🙏 **Prompt begging**: "Please don't touch my secrets"
+* 😴 **Approve everything**: approval fatigue, you'll click *yes* anyway
+* 📝 **Agent deny-lists**: they can't cover everything
 
 </v-clicks>
 
@@ -136,13 +134,15 @@ about your Claude settings.
 -->
 
 ---
+eyebrow: nono.sh
+---
 
-# nono: a sandbox in the kernel
+# A sandbox in the kernel
 
- * **Allow-list** enforced by the OS: Landlock (Linux), Seatbelt (macOS)
- * **Irrevocable**: once applied, not even the sandboxed process can undo it
- * Works for **any command**: agents, `python`, `uv`, `pytest`, …
- * Credentials are **always denied**, even inside allowed paths
+* **Allow-list** enforced by the OS: Landlock (Linux), Seatbelt (macOS)
+* **Irrevocable**: once applied, not even the sandboxed process can undo it
+* Works for **any command**: agents, `python`, `uv`, `pytest`, …
+* Credentials are **always denied**, even inside allowed paths
 
 ```bash
 $ nono run --allow-cwd -- python -c "import os; os.listdir('/home/raphael/.ssh')"
@@ -165,6 +165,9 @@ is on, it can't be lifted, not by the agent and not by a malicious package.
 -->
 
 ---
+layout: code
+eyebrow: In practice
+---
 
 # For your Python workflow
 
@@ -179,14 +182,10 @@ nono run --allow-cwd -- uv run pytest
 nono run --allow-cwd \
   --allow-domain pypi.org --allow-domain files.pythonhosted.org \
   -- uv sync
+
+# something went wrong? undo it from the snapshot
+nono rollback
 ```
-
-<v-click>
-
- * Undo with atomic snapshots: `nono rollback`
- * Audit trail of what was allowed *and* denied
-
-</v-click>
 
 <!--
 ~35s. Three ways I use it. The agent with the built-in claude profile. Running
@@ -195,16 +194,14 @@ network access limited to PyPI. A stealer can run, but it can't read your
 keys and it can't phone home.
 
 Plus: snapshots and rollback if the agent messes up your working copy, and an
-audit log.
+audit log of what was allowed and denied.
 -->
 
 ---
-layout: two-cols-header
+layout: two-cols
+eyebrow: Secrets
+heading: Don't forget the environment
 ---
-
-# Don't forget the environment
-
-::left::
 
 Env vars are **inherited by default**
 
@@ -232,8 +229,7 @@ phantom token.
   "extends": "claude",
   "environment": {
     "allow_vars": [
-      "PATH", "HOME", "TERM",
-      "LANG", "LC_*"
+      "PATH", "HOME", "TERM", "LANG", "LC_*"
     ]
   }
 }
@@ -254,12 +250,10 @@ only gets a session token that's useless outside the sandbox.
 -->
 
 ---
-class: text-center
+eyebrow: P.S.
 ---
 
-# P.S. Claude helped me make these slides
-
-…running inside nono:
+# Claude helped me make these slides, inside nono
 
 ```text
 $ ls ~/projects/python-summit
@@ -271,13 +265,9 @@ DENIED
   Suggested fix: --read /home/raphael/projects/python-summit
 ```
 
-<div class="mt-8">
+> Sandbox as the outer wall + agent permissions + you in the loop
 
-**Sandbox as the outer wall + agent permissions + you in the loop**
-
-[nono.sh](https://nono.sh) · [blog: Safe Ways to Use AI Agents](https://blog.rnstlr.ch/safe-ways-to-use-ai-agents.html)
-
-</div>
+[nono.sh](https://nono.sh) · [blog.rnstlr.ch/safe-ways-to-use-ai-agents.html](https://blog.rnstlr.ch/safe-ways-to-use-ai-agents.html)
 
 <!--
 ~30s. Fun fact: Claude, running in nono, helped me with these slides. It tried
